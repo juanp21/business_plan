@@ -21,7 +21,10 @@ const chartOptions = {
                 text: 'Client Count'
             },
             min: 0,
-            max: 400,
+            max: 350,
+            ticks: {
+                stepSize: 50
+            },
         }
     },
     plugins: {
