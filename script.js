@@ -21,7 +21,7 @@ const chartOptions = {
                 text: 'Client Count'
             },
             min: 0,
-            max: 900
+            max: 400,
         }
     },
     plugins: {
@@ -30,7 +30,7 @@ const chartOptions = {
                 afterBody: function(tooltipItems) {
                     const dataIndex = tooltipItems[0].dataIndex;
                     const clients = tooltipItems[0].raw;
-                    const revenuePerClient = [2700, 6900, 13500, 14500][Math.min(dataIndex, 3)];
+                    const revenuePerClient = [2700, 2700, 2700, 2700, 6900, 6900, 6900, 6900, 13500, 13500, 13500, 13500][dataIndex];
                     const grossRevenue = (clients * revenuePerClient / 1000).toFixed(1);
                     const netRevenue = (clients * revenuePerClient * 0.29 / 1000).toFixed(1);
                     return [
@@ -43,14 +43,13 @@ const chartOptions = {
     }
 };
 
-const labels = ['Q4 2025', 'Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026', 'Q1 2027', 'Q2 2027', 'Q3 2027', 'Q4 2027', 'Q1 2028', 'Q2 2028', 'Q3 2028', 'Q4 2028'];
+const labels = ['Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026', 'Q1 2027', 'Q2 2027', 'Q3 2027', 'Q4 2027', 'Q1 2028', 'Q2 2028', 'Q3 2028', 'Q4 2028'];
 
-const conservativeData = [1, 8, 15, 25, 40, 60, 85, 125, 199, 280, 390, 480, 583];
-const aggressiveData = [1, 12, 25, 45, 70, 100, 125, 180, 280, 420, 580, 720, 850];
+const conservativeData = [2, 5, 10, 15, 25, 38, 52, 65, 100, 140, 170, 199];
+const aggressiveData = [3, 8, 13, 18, 32, 50, 82, 118, 168, 225, 275, 325];
 
 // Check if charts exist before creating them
 if (document.getElementById('conservativeChart')) {
-    // Conservative Chart with Network Effects Shading
     const conservativeCtx = document.getElementById('conservativeChart').getContext('2d');
     new Chart(conservativeCtx, {
         type: 'line',
@@ -59,7 +58,7 @@ if (document.getElementById('conservativeChart')) {
             datasets: [
                 {
                     label: 'Network Effects Area',
-                    data: [null, null, null, null, null, null, null, null, 199, 280, 390, 480, 583],
+                    data: [null, null, null, null, null, null, null, 65, 100, 140, 170, 199],
                     backgroundColor: 'rgba(16, 185, 129, 0.15)',
                     borderColor: 'transparent',
                     fill: 'origin',
@@ -88,7 +87,6 @@ if (document.getElementById('conservativeChart')) {
 }
 
 if (document.getElementById('aggressiveChart')) {
-    // Aggressive Chart with Network Effects Shading
     const aggressiveCtx = document.getElementById('aggressiveChart').getContext('2d');
     new Chart(aggressiveCtx, {
         type: 'line',
@@ -97,7 +95,7 @@ if (document.getElementById('aggressiveChart')) {
             datasets: [
                 {
                     label: 'Network Effects Area',
-                    data: [null, null, null, null, null, null, 125, 180, 280, 420, 580, 720, 850],
+                    data: [null, null, null, null, null, 50, 82, 118, 168, 225, 275, 325],
                     backgroundColor: 'rgba(59, 130, 246, 0.15)',
                     borderColor: 'transparent',
                     fill: 'origin',
